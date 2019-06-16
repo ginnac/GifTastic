@@ -39,8 +39,8 @@ $("#submit").on("click",function(){
     newButton.text(val);
     //append each button to the DOM
     $("#list-of-animals").append(newButton);
-    
-    $("button").on("click", function click(){
+    //!!!!!!make New buttons redeem API information as well, copy and paste button function!!!!!
+    $(newButton).on("click", function click(){
             //clearing #pic-of-animals
         $("#pic-of-animals").html("");
         
@@ -68,7 +68,7 @@ $("#submit").on("click",function(){
             newP.text(apiInformation[i].rating);
             //create image element and add atrribute SRC to it, append it to div
             var pic = $("<img>");
-            pic.attr("src", apiInformation[i].images.fixed_height.url);
+            pic.attr("src", apiInformation[i].images.fixed_height_still.url);
             newDiv.append(newP);
             newDiv.append(pic);
             //prepend div to the DIV ID#pic-of-animals in the dom
@@ -109,7 +109,7 @@ $.ajax({
     newP.text(apiInformation[i].rating);
     //create image element and add atrribute SRC to it, append it to div
     var pic = $("<img>");
-    pic.attr("src", apiInformation[i].images.fixed_height.url);
+    pic.attr("src", apiInformation[i].images.fixed_height_still.url);
     newDiv.append(newP);
     newDiv.append(pic);
     //prepend div to the DIV ID#pic-of-animals in the dom
@@ -120,17 +120,7 @@ $.ajax({
    
 }); 
 
-
-
-
-
-
-
-//!!!!!!make New buttons redeem API information as well!!!!!
-    
-    
-    
-    // conditionals to play or stop when clicking on them: 
+// conditionals to play or stop when clicking on them: 
 
 
 
