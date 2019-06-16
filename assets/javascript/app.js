@@ -3,7 +3,7 @@ var apiKey= "6QlHklQAYdyxsSYBT1vHiN0UGOSifUUb"
 
 //create the array of animals that will display in buttons
 var animals = ["dog","cat","fish","pig","dolphin","shark","elephant"]
-var newAnimals=[]
+
 
 //loop to go thorugh each element of the array with the intention to create buttons for each
 for(var i=0;i<animals.length;i++){
@@ -25,12 +25,12 @@ $("#submit").on("click",function(){
     var val = $("#user-entry").val().trim();
     console.log(val);
     if (val !==""){
-    console.log(newAnimals);
+    console.log(animals);
     //create button and add atribute to the button
-    if(!newAnimals.includes(val)){
+    if(!animals.includes(val)){
     //testing the new animals have been added   
-    newAnimals.push(val);
-    console.log(newAnimals);
+    animals.push(val);
+    console.log(animals);
     //creating button for new animals
     var newButton= $("<button>")
     //and adding atributes to this buttons...
@@ -39,30 +39,68 @@ $("#submit").on("click",function(){
     newButton.text(val);
     //append each button to the DOM
     $("#list-of-animals").append(newButton);
+    
+    $("button").on("click", function click(){
+            //clearing #pic-of-animals
+        $("#pic-of-animals").html("");
+        
+        console.log("hola");
+        
+        var animal = $(this).attr("data-animal-name")
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
+        //ajax function
+        $.ajax({
+            url:queryURL,
+            method: "GET"
+            }) .then(function(response){
+            // see inside the response
+            console.log(response);
+            
+            //lets get arrayfrom response
+            var apiInformation = response.data;
+            //lets go through each value of the array
+            for(var i=0;i<apiInformation.length;i++){
+            //create div for the image and for the rating; 
+            //create div
+            var newDiv = $("<div>");
+            //create p, and append rating 
+            var newP = $("<p>");
+            newP.text(apiInformation[i].rating);
+            //create image element and add atrribute SRC to it, append it to div
+            var pic = $("<img>");
+            pic.attr("src", apiInformation[i].images.fixed_height.url);
+            newDiv.append(newP);
+            newDiv.append(pic);
+            //prepend div to the DIV ID#pic-of-animals in the dom
+            $("#pic-of-animals").prepend(newDiv);
+            }
+            });
+        }); 
 }
 }
 });
     
 //when clicking on each button
-$("button").on("click", function(){
+$("button").on("click", function click(){
+    //clearing #pic-of-animals
+$("#pic-of-animals").html("");
 
-    console.log("hola");
+console.log("hola");
 
-    var animal = $(this).attr("data-animal-name")
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
-
-    //ajax function
+var animal = $(this).attr("data-animal-name")
+var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
+//ajax function
 $.ajax({
     url:queryURL,
     method: "GET"
-}) .then(function(response){
-// see inside the response
- console.log(response);
-
-//lets get arrayfrom response
-var apiInformation = response.data;
-//lets go through each value of the array
-for(var i=0;i<apiInformation.length;i++){
+    }) .then(function(response){
+    // see inside the response
+    console.log(response);
+    
+    //lets get arrayfrom response
+    var apiInformation = response.data;
+    //lets go through each value of the array
+    for(var i=0;i<apiInformation.length;i++){
     //create div for the image and for the rating; 
     //create div
     var newDiv = $("<div>");
@@ -76,13 +114,19 @@ for(var i=0;i<apiInformation.length;i++){
     newDiv.append(pic);
     //prepend div to the DIV ID#pic-of-animals in the dom
     $("#pic-of-animals").prepend(newDiv);
-}
-
-});
-
+    }
+    
+    });
+   
 }); 
 
-//make this buttons redeem API information as well: 
+
+
+
+
+
+
+//!!!!!!make New buttons redeem API information as well!!!!!
     
     
     
