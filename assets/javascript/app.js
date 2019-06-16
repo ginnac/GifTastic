@@ -66,7 +66,7 @@ $("#submit").on("click",function(){
             var newDiv = $("<div>");
             //create p, and append rating 
             var newP = $("<p>");
-            newP.text(apiInformation[i].rating);
+            newP.text("Rating: " + apiInformation[i].rating);
             //create image element and add atrribute SRC to it, append it to div
             var pic = $("<img>");
             pic.attr("src", apiInformation[i].images.fixed_height_still.url);
@@ -123,7 +123,7 @@ $.ajax({
     var newDiv = $("<div>");
     //create p, and append rating 
     var newP = $("<p>");
-    newP.text(apiInformation[i].rating);
+    newP.text("Rating: "+ apiInformation[i].rating);
     //create image element and add atrribute SRC to it, append it to div
     var pic = $("<img>");
     pic.attr("src", apiInformation[i].images.fixed_height_still.url);
