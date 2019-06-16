@@ -1,0 +1,64 @@
+//API key 
+var apiKey= "6QlHklQAYdyxsSYBT1vHiN0UGOSifUUb"
+
+//create the array of animals that will display in buttons
+var animals = ["dog","cat","fish","pig","dolphin","shark","elephant"]
+//loop to go thorugh each element of the array with the intention to create buttons for each
+for(var i=0;i<animals.length;i++){
+    //create buttons for each
+    var btn = $("<button>")
+    //create attribute names for each so we can use it in the API topic search
+    btn.attr("data-animal-name", animals[i])
+    //add text to each button 
+    btn.text(animals[i]);
+    //append each button to the DOM
+    $("#list-of-animals").append(btn);
+
+}
+
+//when clicking on each button
+$("button").on("click", function(){
+
+    console.log("hola");
+
+    var animal = $(this).attr("data-animal-name")
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
+
+    //ajax function
+
+
+$.ajax({
+    url:queryURL,
+    method: "GET"
+}) .then(function(response){
+// see inside the response
+ console.log(response);
+
+//lets get arrayfrom response
+var apiInformation = response.data;
+//lets go through each value of the array
+for(var i=0;i<apiInformation.length;i++){
+    //create div for the image and for the rating; 
+    //create div
+    var newDiv = $("<div>");
+    //create p, and append rating 
+    var newP = $("<p>");
+    newP.text(apiInformation[i].rating);
+    //create image element and add atrribute SRC to it, append it to div
+    var pic = $("<img>");
+    pic.attr("src", apiInformation[i].images.fixed_height.url);
+    newDiv.append(newP);
+    newDiv.append(pic);
+    //prepend div to the DIV ID#pic-of-animals in the dom
+    $("#pic-of-animals").prepend(newDiv);
+}
+
+
+
+
+
+
+});
+
+}); 
+
