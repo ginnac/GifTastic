@@ -39,7 +39,8 @@ $("#submit").on("click",function(){
     newButton.text(val);
     //append each button to the DOM
     $("#list-of-animals").append(newButton);
-    //!!!!!!make New buttons redeem API information as well, copy and paste button function!!!!!
+
+    // !!!!!!make New buttons redeem API information as well, copy and paste button function!!!!!
     $(newButton).on("click", function click(){
             //clearing #pic-of-animals
         $("#pic-of-animals").html("");
@@ -69,25 +70,41 @@ $("#submit").on("click",function(){
             //create image element and add atrribute SRC to it, append it to div
             var pic = $("<img>");
             pic.attr("src", apiInformation[i].images.fixed_height_still.url);
+            pic.attr("data-still",apiInformation[i].images.fixed_height_still.url);
+            pic.attr("data-moving",apiInformation[i].images.fixed_height.url);
+            pic.attr("status", "still");
+            pic.attr("class","gif")
             newDiv.append(newP);
             newDiv.append(pic);
             //prepend div to the DIV ID#pic-of-animals in the dom
             $("#pic-of-animals").prepend(newDiv);
             }
+
+            gif();
             });
         }); 
 }
 }
 });
     
-//when clicking on each button
+
+
+
+
+ajaxApi();
+
+   
+
+
+function ajaxApi(){
+    //when clicking on each button
 $("button").on("click", function click(){
     //clearing #pic-of-animals
 $("#pic-of-animals").html("");
 
 console.log("hola");
+    var animal = $(this).attr("data-animal-name")
 
-var animal = $(this).attr("data-animal-name")
 var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
 //ajax function
 $.ajax({
@@ -110,17 +127,52 @@ $.ajax({
     //create image element and add atrribute SRC to it, append it to div
     var pic = $("<img>");
     pic.attr("src", apiInformation[i].images.fixed_height_still.url);
+    pic.attr("data-still",apiInformation[i].images.fixed_height_still.url);
+    pic.attr("data-moving",apiInformation[i].images.fixed_height.url);
+    pic.attr("status", "still");
+    pic.attr("class","gif")
     newDiv.append(newP);
     newDiv.append(pic);
     //prepend div to the DIV ID#pic-of-animals in the dom
-    $("#pic-of-animals").prepend(newDiv);
+    $("#pic-of-animals").prepend(newDiv);  
+         // conditionals to play or stop when clicking on them: 
+
     }
+
+    gif();
     
+
     });
-   
+
+}); 
+         
+
+}
+
+function gif(){
+
+$(".gif").on("click", function(){
+    console.log("hola");
+  var status = $(this).attr("status");
+  var still = $(this).attr("data-still");
+  var moving = $(this).attr("data-moving");
+
+  if (status === "still"){
+      $(this).attr("src",moving);
+      $(this).attr("status","moving")
+  }
+  else if(status==="moving"){
+      $(this).attr("src",still);
+      $(this).attr("status","still")
+
+  }
+
+
 }); 
 
-// conditionals to play or stop when clicking on them: 
+}
+
+ 
 
 
 
