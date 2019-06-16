@@ -3,6 +3,8 @@ var apiKey= "6QlHklQAYdyxsSYBT1vHiN0UGOSifUUb"
 
 //create the array of animals that will display in buttons
 var animals = ["dog","cat","fish","pig","dolphin","shark","elephant"]
+var newAnimals=[]
+
 //loop to go thorugh each element of the array with the intention to create buttons for each
 for(var i=0;i<animals.length;i++){
     //create buttons for each
@@ -12,10 +14,35 @@ for(var i=0;i<animals.length;i++){
     //add text to each button 
     btn.text(animals[i]);
     //append each button to the DOM
-    $("#list-of-animals").append(btn);
+    $("#list-of-animals").append(btn);}
 
+
+//work on creating new buttons from user input: 
+$("#submit").on("click",function(){
+    //prevent page to refresh
+    event.preventDefault();
+    //get value user entered, and trim white spaces;
+    var val = $("#user-entry").val().trim();
+    console.log(val);
+    if (val !==""){
+    console.log(newAnimals);
+    //create button and add atribute to the button
+    if(!newAnimals.includes(val)){
+    //testing the new animals have been added   
+    newAnimals.push(val);
+    console.log(newAnimals);
+    //creating button for new animals
+    var newButton= $("<button>")
+    //and adding atributes to this buttons...
+    newButton.attr("data-animal-name", val)
+    //and text...
+    newButton.text(val);
+    //append each button to the DOM
+    $("#list-of-animals").append(newButton);
 }
-
+}
+});
+    
 //when clicking on each button
 $("button").on("click", function(){
 
@@ -25,8 +52,6 @@ $("button").on("click", function(){
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
 
     //ajax function
-
-
 $.ajax({
     url:queryURL,
     method: "GET"
@@ -53,12 +78,18 @@ for(var i=0;i<apiInformation.length;i++){
     $("#pic-of-animals").prepend(newDiv);
 }
 
-
-
-
-
-
 });
 
 }); 
+
+//make this buttons redeem API information as well: 
+    
+    
+    
+    // conditionals to play or stop when clicking on them: 
+
+
+
+
+
 
