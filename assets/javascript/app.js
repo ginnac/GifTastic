@@ -22,6 +22,7 @@ function ajaxfunction(animal) {
                 //create div for the image and for the rating; 
                 //create div
                 var newDiv = $("<div>");
+                newDiv.attr("id","div");
                 //create p, and add text in rating 
                 var newP = $("<p>");
                 newP.text("Gif Rating: " + apiInformation[i].rating);
@@ -77,6 +78,8 @@ $("#submit").on("click",function(){
         newButton.text(val);
         //append each button to the DOM
         $("#list-of-animals").append(newButton);
+        $("#user-entry").val("");
+
         // !!!!!!make New buttons redeem API information as well, copy and paste button function!!!!!
         $(newButton).on("click", function click(){
             //clearing #pic-of-animals
