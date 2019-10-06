@@ -7,7 +7,7 @@ var animals = ["dog","cat","fish","pig","dolphin","shark","elephant"]
 //function with ajax function to call it and use in on button click and new button click
 function ajaxfunction(animal) {
     //query url
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" +apiKey+ "&limit=10"
     //ajax function
     $.ajax({
         url:queryURL,
@@ -57,7 +57,7 @@ for(var i=0;i<animals.length;i++){
 }
 
 //work on creating new buttons from user input: 
-$("#submit").on("click",function(){
+$("#submit").on("click",function(event){
     //prevent page to refresh
     event.preventDefault();
     //get value user entered, and trim white spaces;
