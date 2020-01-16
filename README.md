@@ -1,31 +1,19 @@
 # GifTastic
-Instructions
+
+[Live Demo](https://ginnac.github.io/GifTastic/) 
 
 
-
-Before you can make any part of your site work, you need to create an array of strings, each one related to a topic that interests you. Save it to a variable called topics.
-
-
-We chose animals for our theme, but you can make a list to your own liking.
+## Overview
+Using Ajax (API) I am getting data in form of an object that is used to render results display in our application. Api used is giphy. Users can search any key word and gifts associated to that key word will be rendered.
 
 
-
-Your app should take the topics in this array and create buttons in your HTML.
-
-
-Try using a loop that appends a button for each string in the array.
-
-
-When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
-When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
-
-Under every gif, display its rating (PG, G, so on).
+## Technologies:
+* HTML5
+* CSS
+* Bootstrap
+* Jquery (emphasis Ajax method implementation)
 
 
-This data is provided by the GIPHY API.
-Only once you get images displaying with button presses should you move on to the next step.
-
-
-Add a form to your page that takes a value from a user input box and adds it to your topics array. Then make a function call that takes each topic in the array and remakes the buttons on the page.
-Deploy your assignment to Github Pages.
-Rejoice! You just made something really cool.
+    
+## Developer
+  * [Ginna Campbell](https://github.com/ginnac)
